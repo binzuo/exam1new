@@ -31,14 +31,18 @@
         <association property="department" javaType="department">
             <result property="dname" column="dname"/>
         </association>
+        <collection property="courses" ofType="course">
+            <result property="cname" column="cname"/>
+        </collection>
     </resultMap>
     <select id="list" resultMap="list_map">
         SELECT
             s.id,
             s.sname,
-            d.dname
-        FROM exam.student s INNER JOIN exam.department d
-                ON s.departmentId = d.id
+            d.dname,
+            c.cname
+        FROM exam.student s INNER JOIN exam.department d INNER JOIN exam.course c INNER JOIN exam.student_course sc
+                ON s.departmentId = d.id AND s.id = sc.studentId AND c.id = sc.courseId
         ORDER BY s.id
     </select>
     <select id="query" parameterType="student" resultType="student">

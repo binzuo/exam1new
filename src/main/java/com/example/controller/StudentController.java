@@ -1,6 +1,9 @@
 package com.example.controller;
 
+import com.example.model.StudentCourse;
+import com.example.service.CourseService;
 import com.example.service.DepartmentService;
+import com.example.service.StudentCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +17,17 @@ public class StudentController extends BaseController {
 
     private final StudentService studentService;
     private final DepartmentService departmentService;
+    private final CourseService courseService;
+    private final StudentCourseService studentCourseService;
 
     @Autowired
-    public StudentController(StudentService studentService, DepartmentService departmentService) {
+    public StudentController(StudentService studentService, DepartmentService departmentService, CourseService courseService, StudentCourseService studentCourseService) {
         this.studentService = studentService;
         this.departmentService = departmentService;
+        this.courseService = courseService;
+        this.studentCourseService = studentCourseService;
     }
+
 
     @RequestMapping("add")
     private String add(Student student) {
@@ -61,5 +69,20 @@ public class StudentController extends BaseController {
     private String queryAllDepartments() {
         getSession().setAttribute("departments", departmentService.queryAll());
         return "redirect:/student/add.jsp";
+    }
+
+    @RequestMapping("queryAllCourses/{id}")
+    private String queryAllCourses(@PathVariable int id) {
+        getSession().setAttribute("studentId", id);
+        getSession().setAttribute("courses", courseService.queryAll());
+        return "redirect:/student/selectCourse.jsp";
+    }
+
+    @RequestMapping("selectCourse/{id}")
+    private String selectCourse(@PathVariable int id) {
+        int studentId = (int) getSession().getAttribute("studentId");
+        StudentCourse studentCourse = new StudentCourse(null, studentId, id);
+        studentCourseService.add(studentCourse);
+        return "redirect:/student/selectCourse.jsp";
     }
 }

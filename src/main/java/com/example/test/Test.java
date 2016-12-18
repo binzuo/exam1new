@@ -8,21 +8,22 @@ import org.apache.poi.ss.usermodel.Row;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Administrator
  * 2016/12/18
  */
 public class Test {
-    public static void main(String[] args) {
+
+    public static void convertToExcel(List list) {
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("Sample sheet");
 
         Map<String, Object[]> data = new HashMap<>();
+
+
+
         data.put("1", new Object[]{"Emp No.", "Name", "Salary"});
         data.put("2", new Object[]{1d, "John", 1500000d});
         data.put("3", new Object[]{2d, "Sam", 800000d});

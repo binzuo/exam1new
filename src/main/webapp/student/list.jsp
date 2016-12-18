@@ -17,15 +17,24 @@
                 <th>INDEX</th>
                 <th>SNAME</th>
                 <th>DEAPRTMENTID</th>
-                <th colspan="2">OPERATION</th>
+                <th>COURSES</th>
+                <th colspan="3">OPERATION</th>
             </tr>
             <c:forEach var="student" items="${sessionScope.pagination.list}" varStatus="vs">
             <tr>
                 <td>${vs.count}</td>
                 <td>${student.sname}</td>
                 <td>${student.department.dname}</td>
+                <td>
+                    <ol>
+                        <c:forEach var="course" items="${student.courses}">
+                            <li>${course.cname}</li>
+                        </c:forEach>
+                    </ol>
+                </td>
                 <td><a href="${ctx}/student/search/${student.id}">EDIT</a></td>
                 <td><a class="delete" href="${ctx }/student/remove/${student.id}" onclick="return del()">REMOVE</a></td>
+                <td><a href="${ctx }/student/queryAllCourses/${student.id}">选课</a></td>
             </tr>
             </c:forEach>
         </table>
