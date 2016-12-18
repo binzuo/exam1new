@@ -23,7 +23,6 @@ public class StudentController extends BaseController {
 
     @RequestMapping("add")
     private String add(Student student) {
-        System.out.println(student.getDepartmentId() );
         studentService.add(student);
         return "redirect:/student/list";
     }
@@ -48,6 +47,7 @@ public class StudentController extends BaseController {
 
     @RequestMapping("list")
     private String list() {
+        getSession().setAttribute("departments", departmentService.queryAll());
         return list(1);
     }
 

@@ -23,7 +23,7 @@ CREATE TABLE exam.student (
   id            INT AUTO_INCREMENT PRIMARY KEY
   COMMENT 'PK',
   sname         VARCHAR(255) COMMENT '学生姓名',
-  department_id INT COMMENT '所在系 ID'
+  departmentId INT COMMENT '所在系 ID'
 )
   COMMENT '';
 
@@ -39,8 +39,8 @@ CREATE TABLE exam.department (
 -- FK
 ALTER TABLE exam.student
   ADD CONSTRAINT
-  fk_student_department_id
-FOREIGN KEY (department_id)
+  fk_student_departmentId
+FOREIGN KEY (departmentId)
 REFERENCES exam.department (id);
 
 

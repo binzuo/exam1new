@@ -6,10 +6,10 @@
 <mapper namespace="department">
     <insert id="add" parameterType="Department" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO exam.department (
-    dname
+            dname
         )
         VALUES (
-    #{dname}
+            #{dname}
         );
     </insert>
     <delete id="remove">
@@ -19,13 +19,24 @@
     <update id="modify">
         UPDATE exam.department
         SET
-    dname = #{dname}
+            dname = #{dname}
         WHERE department.id = #{id}
     </update>
-    <select id="list" resultType="department">
-        SELECT *
-        FROM exam.department
-        ORDER BY id
+    <resultMap id="list_map" type="department">
+        <id property="id" column="id"/>
+        <result property="dname" column="dname"/>
+        <collection property="students" ofType="student">
+            <result property="sname" column="sname"/>
+        </collection>
+    </resultMap>
+    <select id="list" resultMap="list_map">
+        SELECT
+            d.id,
+            d.dname,
+            s.sname
+        FROM exam.department d INNER JOIN exam.student s
+                ON d.id = s.departmentId
+        ORDER BY d.id
     </select>
     <select id="query" parameterType="department" resultType="department">
         SELECT *
@@ -34,7 +45,7 @@
             <if test="id != null and id != ''">
                 department.id = #{id}
             </if>
-            <if test="dname != null and dname != ''"> AND dname LIKE "%"#{dname}"%"</if>
+            <if test="dname != null and dname != ''">AND dname LIKE "%"#{dname}"%"</if>
         </where>
     </select>
     <select id="search" resultType="department">

@@ -12,7 +12,8 @@
                 <c:forEach var="department" items="${sessionScope.departments}">
                     <option value="${department.id}">${department.dname}</option>
                 </c:forEach>
-            </select><br>
+            </select>
+            <br>
             <input type="submit" value="ADD">
         </form>
     </body>

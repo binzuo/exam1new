@@ -16,7 +16,7 @@
             <tr>
                 <th>INDEX</th>
                 <th>SNAME</th>
-                <th>DEPARTMENTID</th>
+                <th>DEAPRTMENTID</th>
                 <th colspan="2">OPERATION</th>
             </tr>
             <c:forEach var="student" items="${sessionScope.pagination.list}" varStatus="vs">

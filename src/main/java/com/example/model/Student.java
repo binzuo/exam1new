@@ -15,5 +15,5 @@ public class Student extends BaseModel {
     private String sname;
     private int departmentId;
 
-    private Department department; // 1. 添加 一 端
+    private Department department;
 }

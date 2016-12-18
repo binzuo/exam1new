@@ -9,7 +9,7 @@
         <form action="${ctx}/student/modify" method="post">
             <input type="hidden" name="id" value="${sessionScope.student.id}">
             SNAME: <input name="sname" value="${sessionScope.student.sname}"><br>
-            DEPARTMENTID: <input name="departmentId" value="${sessionScope.student.departmentId}"><br>
+            DEAPRTMENTID: <input name="deaprtmentId" value="${sessionScope.student.deaprtmentId}"><br>
             <input type="submit" value="SAVE">
         </form>
     </body>

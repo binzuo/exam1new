@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="${model?lower_case}">
-    <insert id="add" parameterType="${model}" useGeneratedKeys="true" keyProperty="id">
+    <insert id="add" parameterType="${model?lower_case}" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO ${db}.${table} (
     <#list columns?keys as key>
     ${key}<#if key_has_next>, </#if>
