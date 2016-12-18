@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="studentcourse">
+    <insert id="add" parameterType="studentcourse" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO exam.student_course (
+    studentId, 
+    courseId
+        )
+        VALUES (
+    #{studentId}, 
+    #{courseId}
+        );
+    </insert>
+    <delete id="remove">
+        DELETE FROM exam.student_course
+        WHERE student_course.id = #{id}
+    </delete>
+    <update id="modify">
+        UPDATE exam.student_course
+        SET
+    studentId = #{studentId}, 
+    courseId = #{courseId}
+        WHERE student_course.id = #{id}
+    </update>
+    <select id="list" resultType="studentcourse">
+        SELECT *
+        FROM exam.student_course
+        ORDER BY id
+    </select>
+    <select id="query" parameterType="studentcourse" resultType="studentcourse">
+        SELECT *
+        FROM exam.student_course
+        <where>
+            <if test="id != null and id != ''">
+                student_course.id = #{id}
+            </if>
+            <if test="studentId != null and studentId != ''"> AND studentId LIKE "%"#{studentId}"%"</if>
+            <if test="courseId != null and courseId != ''"> AND courseId LIKE "%"#{courseId}"%"</if>
+        </where>
+    </select>
+    <select id="search" resultType="studentcourse">
+        SELECT *
+        FROM exam.student_course
+        WHERE student_course.id = #{id}
+    </select>
+</mapper>
