@@ -96,8 +96,11 @@ FROM exam.student s INNER JOIN exam.department d
 SELECT
   s.id,
   s.sname,
+  d.dname,
   c.cname
-FROM exam.student s LEFT JOIN exam.student_course sc
-  LEFT JOIN exam.course c
-    ON s.id = sc.studentId AND c.id = sc.courseId
+FROM exam.student s INNER JOIN exam.department d
+    ON s.departmentId = d.id
+  LEFT JOIN exam.student_course sc INNER JOIN exam.course c
+    ON c.id = sc.courseId
+    ON s.id = sc.studentId
 ORDER BY s.id
